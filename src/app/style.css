@@ -4,15 +4,7 @@
   padding: 0;
 }
 
-body {
-  padding: 20px;
-}
-
 ul,
 ol {
   list-style: none;
-}
-
-a {
-  text-decoration: none;
 }

@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client"
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom"
+import { RouterProvider, createBrowserRouter } from "react-router-dom"
 import "./app/style.css"
 import "@fontsource/roboto/300.css"
 import "@fontsource/roboto/400.css"
@@ -14,19 +14,14 @@ import {
   ErrorPage,
   NewsPage,
 } from "./pages"
-import { Navbar } from "./widgets"
 import { Provider } from "react-redux"
 import { store } from "./app/store"
+import { Layout } from "./app"
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <>
-        <Navbar />
-        <Outlet />
-      </>
-    ),
+    element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
       {
