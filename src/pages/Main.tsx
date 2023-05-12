@@ -22,25 +22,25 @@ const MainPage = () => {
         {articles.length &&
           articles.map((article, idx) => (
             <Grid xs={10} sm={6} md={4} key={idx}>
-              <Card
-                variant="outlined"
-                component={Link}
-                to={`/news/${idx}`}
-                sx={{ textDecoration: "none", boxShadow: 3 }}
-              >
-                <CardMedia
-                  sx={{ height: 180 }}
-                  image={article.urlToImage}
-                  title="article image"
-                />
+              <Card variant="outlined" sx={{ boxShadow: 3 }}>
+                <Link to={`/news/${idx}`}>
+                  <CardMedia
+                    sx={{ height: 180 }}
+                    image={article.urlToImage}
+                    title="article image"
+                  />
+                </Link>
                 <CardContent>
                   <Typography
                     gutterBottom
                     variant="h6"
-                    component="div"
+                    component={Link}
+                    to={`/news/${idx}`}
                     sx={{
+                      color: "inherit",
                       textDecoration: "none",
                       "&:hover": { textDecoration: "underline" },
+                      lineHeight: 1,
                     }}
                   >
                     {article.title}
