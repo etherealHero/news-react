@@ -8,8 +8,10 @@ import {
   SettingsPage,
   SupportPage,
   ErrorPage,
+  NewsPage,
 } from "./pages"
 import { Navbar } from "./widgets"
+import { newsLoader } from "./pages/Main"
 
 const router = createBrowserRouter([
   {
@@ -24,7 +26,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
+        loader: newsLoader,
         element: <MainPage />,
+      },
+      {
+        path: "/news/:newsId",
+        element: <NewsPage />,
       },
       {
         path: "/about",

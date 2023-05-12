@@ -1,4 +1,4 @@
-import { useRouteError } from "react-router-dom"
+import { Link, useRouteError } from "react-router-dom"
 
 function ErrorPage() {
   const error = useRouteError()
@@ -7,6 +7,7 @@ function ErrorPage() {
   return (
     <>
       <h1>404! Page not found</h1>
+      <Link to="/">На главную</Link>
     </>
   )
 }
