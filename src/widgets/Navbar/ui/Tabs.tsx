@@ -6,7 +6,7 @@ import { useRouteMatch } from "../lib"
 
 const Tabs = () => {
   const routeMatch = useRouteMatch(["/", "/support", "/settings", "/about"])
-  const currentTab = routeMatch?.pattern?.path
+  const currentTab = routeMatch?.pattern?.path || "/"
 
   return (
     <MTabs

@@ -12,11 +12,12 @@ import {
   SettingsPage,
   SupportPage,
   ErrorPage,
-  NewsPage,
+  DetailsPage,
 } from "./pages"
 import { Provider } from "react-redux"
 import { store } from "./app/store"
 import { Layout } from "./app"
+import { newsLoader } from "./pages/Main"
 
 const router = createBrowserRouter([
   {
@@ -26,11 +27,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
+        loader: newsLoader,
         element: <MainPage />,
       },
       {
-        path: "/news/:newsId",
-        element: <NewsPage />,
+        path: "/news/:id",
+        element: <DetailsPage />,
       },
       {
         path: "/about",
