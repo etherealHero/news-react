@@ -1,4 +1,11 @@
+import { useLoaderData } from "react-router-dom"
+import { INewsData } from "../shared"
+
 function NewsPage() {
+  const data = useLoaderData() as INewsData
+
+  console.log(data)
+
   return (
     <>
       <h1>News Page</h1>

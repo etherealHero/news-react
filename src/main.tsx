@@ -1,6 +1,10 @@
 import ReactDOM from "react-dom/client"
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom"
 import "./app/style.css"
+import "@fontsource/roboto/300.css"
+import "@fontsource/roboto/400.css"
+import "@fontsource/roboto/500.css"
+import "@fontsource/roboto/700.css"
 
 import {
   AboutPage,
@@ -11,7 +15,8 @@ import {
   NewsPage,
 } from "./pages"
 import { Navbar } from "./widgets"
-import { newsLoader } from "./pages/Main"
+import { Provider } from "react-redux"
+import { store } from "./app/store"
 
 const router = createBrowserRouter([
   {
@@ -26,7 +31,6 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        loader: newsLoader,
         element: <MainPage />,
       },
       {
@@ -50,5 +54,7 @@ const router = createBrowserRouter([
 ])
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <RouterProvider router={router} />
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 )
