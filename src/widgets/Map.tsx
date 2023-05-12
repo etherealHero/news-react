@@ -7,7 +7,7 @@ const Map = () => {
   }
 
   return (
-    <YMaps>
+    <YMaps query={{ apikey: "2184a6e9-dd19-4b83-9959-7cbe937df716" }}>
       <YMap
         defaultState={defaultState}
         modules={["control.ZoomControl", "control.FullscreenControl"]}
