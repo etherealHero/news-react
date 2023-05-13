@@ -28,10 +28,10 @@ const Layout = ({ children }: { children?: ReactNode }) => {
     palette: {
       mode,
       primary: {
-        main: "#570107",
+        main: "#bf0410",
       },
       secondary: {
-        main: "#s007399",
+        main: "#048dba",
       },
     },
   })

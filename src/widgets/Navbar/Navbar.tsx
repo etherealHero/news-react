@@ -9,7 +9,7 @@ export default function Navbar() {
 
   return (
     <>
-      <AppBar position="sticky">
+      <AppBar position="sticky" enableColorOnDark>
         <Container>
           <Toolbar sx={{ display: "flex", columnGap: 4 }}>
             <Typography

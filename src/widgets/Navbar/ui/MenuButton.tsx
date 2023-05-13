@@ -10,7 +10,7 @@ const MenuButton = ({ setMenuIsOpen }: Props) => {
   return (
     <IconButton
       color="inherit"
-      sx={{ display: { xs: "block", sm: "none" }, mr: -3 }}
+      sx={{ display: { xs: "flex", sm: "none" }, mr: -3, alignItems: "center" }}
       onClick={() => setMenuIsOpen(true)}
     >
       <Menu />

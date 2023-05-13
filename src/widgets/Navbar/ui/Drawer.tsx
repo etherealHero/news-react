@@ -32,7 +32,7 @@ const Drawer = ({ setMenuIsOpen, menuIsOpen }: Props) => {
         align="center"
         sx={{ mr: 4, ml: 4, mt: 3, mb: 1 }}
       >
-        News
+        Меню
       </Typography>
       <Divider />
       <Box

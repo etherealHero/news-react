@@ -10,7 +10,7 @@ type Props = {
 
 const Article = ({ article, idx }: Props) => {
   return (
-    <Grid xs={10} sm={6} md={4}>
+    <Grid xs={12} sm={6} md={4}>
       <Card variant="outlined" sx={{ boxShadow: 3 }}>
         <Link to={`/news/${idx}`}>
           <CardMedia
