@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom/client"
+import { Provider } from "react-redux"
 import { RouterProvider, createBrowserRouter } from "react-router-dom"
-import "./app/style.css"
 import "@fontsource/roboto/300.css"
 import "@fontsource/roboto/400.css"
 import "@fontsource/roboto/500.css"
@@ -14,7 +14,6 @@ import {
   ErrorPage,
   DetailsPage,
 } from "./pages"
-import { Provider } from "react-redux"
 import { store } from "./app/store"
 import { Layout } from "./app"
 import { newsLoader } from "./pages/Main"
