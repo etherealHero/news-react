@@ -1,4 +1,4 @@
 import { getNews } from "./api"
-import type { INewsData } from "./types"
+import type { INewsData, IArticle } from "./types"
 
-export { getNews, INewsData }
+export { getNews, INewsData, IArticle }

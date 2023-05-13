@@ -9,8 +9,9 @@ import {
 } from "@mui/material"
 
 import { Navbar } from "../widgets"
+import { ReactNode } from "react"
 
-const Layout = () => {
+const Layout = ({ children }: { children?: ReactNode }) => {
   const { fontsize, mode } = useAppSelector((store) => store.theme)
 
   const theme = createTheme({
@@ -26,6 +27,12 @@ const Layout = () => {
     },
     palette: {
       mode,
+      primary: {
+        main: "#570107",
+      },
+      secondary: {
+        main: "#s007399",
+      },
     },
   })
 
@@ -36,6 +43,7 @@ const Layout = () => {
         <Navbar />
         <Container sx={{ pt: 2, pb: 2 }}>
           <Outlet />
+          {children}
         </Container>
       </ThemeProvider>
     </>

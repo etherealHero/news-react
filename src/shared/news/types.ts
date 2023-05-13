@@ -4,7 +4,7 @@ export interface INewsData {
   articles: IArticle[]
 }
 
-interface IArticle {
+export interface IArticle {
   source: {
     id: null
     name: string

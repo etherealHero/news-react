@@ -23,7 +23,7 @@ function ErrorPage() {
         alignItems: "center",
         gap: 2,
         flexDirection: "column",
-        height: "100vh",
+        mt: 10,
       }}
     >
       <Typography variant="h1" textAlign="center" sx={{ fontWeight: "bold" }}>

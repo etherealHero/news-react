@@ -14,6 +14,8 @@ import {
 } from "redux-persist"
 import storage from "redux-persist/lib/storage"
 
+import { themeReducer, newsReducer } from "../entities"
+
 const persistConfig = {
   key: "root",
   storage,
@@ -23,11 +25,10 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   theme: themeReducer,
+  news: newsReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
-
-import themeReducer from "../entities/theme/model"
 
 export const store = configureStore({
   reducer: persistedReducer,

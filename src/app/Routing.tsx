@@ -9,17 +9,19 @@ import {
   ErrorPage,
   DetailsPage,
 } from "../pages"
-import { newsLoader } from "../pages/Main"
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    errorElement: <ErrorPage />,
+    errorElement: (
+      <Layout>
+        <ErrorPage />
+      </Layout>
+    ),
     children: [
       {
         path: "/",
-        loader: newsLoader,
         element: <MainPage />,
       },
       {

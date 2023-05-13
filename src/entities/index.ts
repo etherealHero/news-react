@@ -1,4 +1,4 @@
-import ThemeMode from "./theme/ThemeMode"
-import { themeModel } from "./theme/model"
+import { newsModel, newsReducer, Article } from "./news"
+import { ThemeMode, themeModel, themeReducer } from "./theme"
 
-export { themeModel, ThemeMode }
+export { themeModel, ThemeMode, themeReducer, newsModel, newsReducer, Article }
