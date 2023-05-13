@@ -1,20 +1,48 @@
-import { configureStore } from "@reduxjs/toolkit"
+import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { useDispatch, useSelector } from "react-redux"
 import type { TypedUseSelectorHook } from "react-redux"
+
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist"
+import storage from "redux-persist/lib/storage"
+
+const persistConfig = {
+  key: "root",
+  storage,
+  // не использшвать срез в хранилище:
+  // whitelist: ["theme"],
+}
+
+const rootReducer = combineReducers({
+  theme: themeReducer,
+})
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 import themeReducer from "../entities/theme/model"
 
 export const store = configureStore({
-  reducer: {
-    theme: themeReducer,
-  },
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 })
+export const persistor = persistStore(store)
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
+// hooks
 export type RootState = ReturnType<typeof store.getState>
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 type AppDispatch = typeof store.dispatch
 
-// Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch: () => AppDispatch = useDispatch
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
