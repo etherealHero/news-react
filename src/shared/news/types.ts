@@ -2,6 +2,7 @@ export interface INewsData {
   status: string
   totalResults: number
   articles: IArticle[]
+  message?: string
 }
 
 export interface IArticle {
@@ -16,4 +17,12 @@ export interface IArticle {
   urlToImage: string
   publishedAt: string
   content: string
+}
+
+export enum EDateVariants {
+  all = "all",
+  today = "today",
+  yesterday = "yesterday",
+  lastweek = "lastweek",
+  pickdate = "pickdate",
 }

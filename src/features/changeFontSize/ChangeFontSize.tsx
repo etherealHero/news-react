@@ -12,12 +12,13 @@ const ChangeFontSize = () => {
   }
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 80 }}>
+    <FormControl sx={{ minWidth: 80 }}>
       <Select
         value={"" + fontsize}
         onChange={changeHandler}
         displayEmpty
         autoWidth
+        size="small"
       >
         <MenuItem value={11}>Очень маленький</MenuItem>
         <MenuItem value={13}>Маленький</MenuItem>

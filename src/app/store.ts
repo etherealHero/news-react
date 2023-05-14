@@ -14,18 +14,18 @@ import {
 } from "redux-persist"
 import storage from "redux-persist/lib/storage"
 
-import { themeReducer, newsReducer } from "../entities"
+import { themeReducer, newsReducer, queryReducer } from "../entities"
 
 const persistConfig = {
   key: "root",
   storage,
-  // не использшвать срез в хранилище:
-  // whitelist: ["theme"],
+  whitelist: ["theme", "query"],
 }
 
 const rootReducer = combineReducers({
   theme: themeReducer,
   news: newsReducer,
+  query: queryReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

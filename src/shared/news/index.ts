@@ -1,4 +1,5 @@
-import { getNews } from "./api"
+import { newsAPI } from "./api"
 import type { INewsData, IArticle } from "./types"
+import { EDateVariants } from "./types"
 
-export { getNews, INewsData, IArticle }
+export { newsAPI, INewsData, IArticle, EDateVariants }

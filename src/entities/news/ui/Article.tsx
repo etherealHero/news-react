@@ -1,7 +1,7 @@
 import { Card, CardContent, CardMedia, Typography } from "@mui/material"
 import Grid from "@mui/material/Unstable_Grid2"
 import { Link } from "react-router-dom"
-import { IArticle } from "../../shared"
+import { IArticle } from "../../../shared"
 
 type Props = {
   article: IArticle

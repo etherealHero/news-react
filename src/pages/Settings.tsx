@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material"
 
-import { ChangeFontSize, ToggleTheme } from "../features"
+import { ChangeFontSize, SliderPageSize, ToggleTheme } from "../features"
 import { ThemeMode } from "../entities"
 
 function SettingsPage() {
@@ -10,13 +10,32 @@ function SettingsPage() {
         Настройки
       </Typography>
       <Box sx={{ mb: 1, display: "flex", columnGap: 2, alignItems: "center" }}>
-        Цветовая схема:
+        Цветовая тема:
         <ToggleTheme />
         <ThemeMode />
       </Box>
-      <Box sx={{ mb: 1, display: "flex", columnGap: 2, alignItems: "center" }}>
+      <Box
+        sx={{
+          mb: 1,
+          display: "flex",
+          columnGap: 2,
+          alignItems: "center",
+          flexWrap: "wrap",
+        }}
+      >
         Размер шрифта:
         <ChangeFontSize />
+      </Box>
+      <Box
+        sx={{
+          mb: 1,
+          display: { xs: "block", sm: "flex" },
+          columnGap: 2,
+          alignItems: "center",
+        }}
+      >
+        Количество новостей на странице:
+        <SliderPageSize />
       </Box>
     </>
   )

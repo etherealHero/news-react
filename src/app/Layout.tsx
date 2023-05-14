@@ -1,4 +1,6 @@
 import { Outlet } from "react-router-dom"
+import { LocalizationProvider } from "@mui/x-date-pickers"
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import { useAppSelector } from "./store"
 import {
   Container,
@@ -37,7 +39,7 @@ const Layout = ({ children }: { children?: ReactNode }) => {
   })
 
   return (
-    <>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ThemeProvider theme={theme}>
         <CssBaseline enableColorScheme />
         <Navbar />
@@ -46,7 +48,7 @@ const Layout = ({ children }: { children?: ReactNode }) => {
           {children}
         </Container>
       </ThemeProvider>
-    </>
+    </LocalizationProvider>
   )
 }
 

@@ -1,36 +1,56 @@
 import { useEffect } from "react"
-import { Typography } from "@mui/material"
+import { Box, Typography } from "@mui/material"
 import Grid from "@mui/material/Unstable_Grid2"
-
 import { useAppDispatch, useAppSelector } from "../app/store"
-import { Article, newsModel } from "../entities"
+
+import { DatePublishPicker, PaginationNews } from "../features"
+import { Article, SkeletonArticle, newsModel } from "../entities"
 
 const MainPage = () => {
-  const newsState = useAppSelector((state) => state.news)
+  const { status, error, articles } = useAppSelector((state) => state.news)
+  const { pageSize } = useAppSelector((state) => state.query)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     dispatch(newsModel.fetchNews())
   }, [])
 
-  if (newsState.status === "pending") return <>Loading...</>
-  if (newsState.status === "error") return <>{newsState.error}</>
-
   return (
     <>
-      <Typography variant="h4" sx={{ mb: 2 }}>
-        Главная
-      </Typography>
-      <Grid
-        container
-        spacing={3}
-        sx={{ justifyContent: { xs: "center", sm: "flex-start" } }}
+      <Box
+        display={{ xs: "block", sm: "flex" }}
+        justifyContent="space-between"
+        alignItems="center"
+        mb={2}
       >
-        {newsState.articles.length &&
-          newsState.articles.map((article, idx) => (
+        <Typography variant="h4">Главная</Typography>
+        <Box display="flex" alignItems="center" gap={1} flexWrap="wrap">
+          <Typography>Дата публикации:</Typography>
+          <DatePublishPicker />
+        </Box>
+      </Box>
+      {status === "pending" ? (
+        <SkeletonArticle length={pageSize} />
+      ) : status === "rejected" ? (
+        <Typography>{error}</Typography>
+      ) : articles?.length ? (
+        <Grid
+          container
+          spacing={3}
+          sx={{ justifyContent: { xs: "center", sm: "flex-start" } }}
+        >
+          {articles.map((article, idx) => (
             <Article article={article} key={idx} idx={idx} />
           ))}
-      </Grid>
+        </Grid>
+      ) : (
+        <Typography variant="h5" align="center" mt={10}>
+          Ничего не найдено
+        </Typography>
+      )}
+      <Box display="flex" justifyContent="center" mt={4}>
+        <PaginationNews />
+      </Box>
     </>
   )
 }

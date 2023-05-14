@@ -1,22 +1,79 @@
 import axios from "axios"
-import { baseUrl } from "./config"
-import { INewsData } from "./types"
-import { data as fakeData } from "./fakeData"
+import { EDateVariants, INewsData } from "."
 
-export const getNews = async (): Promise<INewsData> => {
-  try {
-    await new Promise((r) => setTimeout(r, 1000))
+import dayjs from "dayjs"
+import weekday from "dayjs/plugin/weekday"
+import "dayjs/locale/ru"
 
-    throw new Error("need fakeData")
+dayjs.locale("ru")
+dayjs.extend(weekday)
 
-    const { data } = await axios<INewsData>(`${baseUrl}&pageSize=10&page=1`)
+const API_KEY = "3d507fc9f30b4a7d9efeb083c18b25c8"
 
-    return data
-  } catch (error) {
-    return {
-      status: fakeData.status,
-      totalResults: fakeData.totalResults,
-      articles: fakeData.articles.slice(0, 10),
+const baseUrl = `https://newsapi.org/v2/everything?q=технологии&language=ru&apiKey=${API_KEY}&domains=techinsider.ru,habr.com,lifehacker.ru,computerra.ru,servernews.ru,xakep.ru,iphones.ru,cnews.ru,snob.ru,3dnews.ru,overclockers.ru,droider.ru&sortBy=publishedAt`
+
+interface INewsAPI {
+  page: number
+  pageSize: number
+  dateVariant: EDateVariants
+  date: string | null
+}
+
+export const newsAPI = {
+  getAll: async ({
+    page,
+    pageSize,
+    dateVariant,
+    date = dayjs().format(),
+  }: INewsAPI) => {
+    // await new Promise((r) => setTimeout(r, 100000000000000))
+
+    const urlWithWithPages = `${baseUrl}&pageSize=${pageSize}&page=${page}`
+    let res
+
+    switch (dateVariant) {
+      case EDateVariants.today: {
+        const from = dayjs().format("YYYY-MM-DD")
+
+        res = await axios<INewsData>(`${urlWithWithPages}&from=${from}`)
+        break
+      }
+
+      case EDateVariants.yesterday: {
+        const from = dayjs().subtract(1, "day").format("YYYY-MM-DD")
+        const to = dayjs().subtract(1, "day").format("YYYY-MM-DD")
+
+        res = await axios<INewsData>(
+          `${urlWithWithPages}&from=${from}&to=${to}`
+        )
+        break
+      }
+
+      case EDateVariants.lastweek: {
+        const from = dayjs().weekday(-7).format("YYYY-MM-DD")
+        const to = dayjs().weekday(-1).format("YYYY-MM-DD")
+
+        res = await axios<INewsData>(
+          `${urlWithWithPages}&from=${from}&to=${to}`
+        )
+        break
+      }
+
+      case EDateVariants.pickdate: {
+        const to = dayjs(date).format("YYYY-MM-DD")
+
+        console.log(to)
+
+        res = await axios<INewsData>(`${urlWithWithPages}&to=${to}`)
+        break
+      }
+
+      case EDateVariants.all:
+      default:
+        res = await axios<INewsData>(urlWithWithPages)
+        break
     }
-  }
+
+    return res
+  },
 }
