@@ -58,7 +58,7 @@ export const newsAPI = {
       }
 
       case EDateVariants.pickdate: {
-        const to = dayjs(date).format("YYYY-MM-DD")
+        const to = dayjs(date).subtract(1, "day").format("YYYY-MM-DD")
 
         console.log(to)
 
