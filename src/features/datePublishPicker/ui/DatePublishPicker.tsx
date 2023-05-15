@@ -1,6 +1,6 @@
 import { useState } from "react"
 import MenuItem from "@mui/material/MenuItem"
-import { FormControl, Select, SelectChangeEvent } from "@mui/material"
+import { FormControl, Select, SelectChangeEvent, Typography } from "@mui/material"
 import { useAppDispatch, useAppSelector } from "../../../app/store"
 import { newsModel, queryModel } from "../../../entities"
 import { EDateVariants } from "../../../shared"
@@ -16,9 +16,15 @@ const DatePublishPicker = () => {
   const dispatch = useAppDispatch()
 
   const changeHandler = (e: SelectChangeEvent) => {
+    let variant = e.target.value as EDateVariants
+
+   if (variant === EDateVariants.canceldate) variant = EDateVariants.all 
+   if (variant === EDateVariants.pickdate) variant = dateVariant 
+
+    dispatch(queryModel.setDateVariant(variant))
+    
     if (e.target.value === EDateVariants.pickdate) return handleOpen()
 
-    dispatch(queryModel.setDateVariant(e.target.value as EDateVariants))
     dispatch(queryModel.setDate(null))
     dispatch(queryModel.setPage(1))
     dispatch(newsModel.fetchNews())
@@ -28,7 +34,7 @@ const DatePublishPicker = () => {
     <>
       <FormControl sx={{ minWidth: 80 }}>
         <Select
-          value={date ? "date" : dateVariant}
+          value={date ? EDateVariants.date : dateVariant}
           onChange={changeHandler}
           displayEmpty
           autoWidth
@@ -42,8 +48,14 @@ const DatePublishPicker = () => {
             <MenuItem value={EDateVariants.pickdate}>Установить дату</MenuItem>
           )}
           {date && (
-            <MenuItem value={"date"}>
+            <MenuItem value={EDateVariants.date} divider>
               {dayjs(date).format("D MMM YYYY[ г.]")}
+            </MenuItem>
+          )}
+          {date && (
+            <MenuItem value={EDateVariants.canceldate} >
+
+              <Typography color="primary">Сбросить</Typography>
             </MenuItem>
           )}
         </Select>

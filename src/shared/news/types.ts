@@ -25,4 +25,6 @@ export enum EDateVariants {
   yesterday = "yesterday",
   lastweek = "lastweek",
   pickdate = "pickdate",
+  date = "date",
+  canceldate = "canceldate"
 }
