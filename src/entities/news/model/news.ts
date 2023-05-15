@@ -14,7 +14,7 @@ const fetchNews = createAsyncThunk(
   `${Model.name}/fetch`,
   async (_, thunkAPI) => {
     try {
-      if (false) return data
+      if (true) return data
 
       const { dateVariant, page, pageSize, date } = (
         thunkAPI.getState() as RootState

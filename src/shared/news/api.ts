@@ -8,7 +8,9 @@ import "dayjs/locale/ru"
 dayjs.locale("ru")
 dayjs.extend(weekday)
 
-const API_KEY = "3d507fc9f30b4a7d9efeb083c18b25c8"
+// const API_KEY = "d5b30b1afd82498a992311089ea92b4c"
+// const API_KEY = "3d507fc9f30b4a7d9efeb083c18b25c8"
+const API_KEY = "b121cb1b4a2b4016b3f526cc5c51fa59"
 
 const baseUrl = `https://newsapi.org/v2/everything?q=технологии&language=ru&apiKey=${API_KEY}&domains=techinsider.ru,habr.com,lifehacker.ru,computerra.ru,servernews.ru,xakep.ru,iphones.ru,cnews.ru,snob.ru,3dnews.ru,overclockers.ru,droider.ru&sortBy=publishedAt`
 

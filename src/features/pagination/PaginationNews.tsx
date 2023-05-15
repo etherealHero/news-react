@@ -10,6 +10,8 @@ const PaginationNews = () => {
   const dispatch = useAppDispatch()
 
   const changeHandler = (_: React.ChangeEvent<unknown>, page: number) => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+
     dispatch(queryModel.setPage(page))
 
     dispatch(newsModel.fetchNews())

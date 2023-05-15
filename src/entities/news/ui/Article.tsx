@@ -1,4 +1,4 @@
-import { Card, CardContent, CardMedia, Typography } from "@mui/material"
+import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material"
 import Grid from "@mui/material/Unstable_Grid2"
 import { Link } from "react-router-dom"
 import { IArticle } from "../../../shared"
@@ -13,11 +13,36 @@ const Article = ({ article, idx }: Props) => {
     <Grid xs={12} sm={6} md={4}>
       <Card variant="outlined" sx={{ boxShadow: 3 }}>
         <Link to={`/news/${idx}`}>
-          <CardMedia
-            sx={{ height: 180 }}
-            image={article.urlToImage}
-            title="article image"
-          />
+          <Box bgcolor="primary.main" position="relative" height={180}>
+            <Typography
+              variant="h3"
+              sx={{
+                position: "absolute",
+                zIndex: 0,
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                fontFamily: "serif",
+                fontWeight: 500,
+                color: "#fff",
+              }}
+            >
+              News
+            </Typography>
+            <CardMedia
+              sx={{
+                height: 180,
+                width: "100%",
+                position: "absolute",
+                left: 0,
+                top: 0,
+                zIndex: 10,
+                bgcolor: "transparent",
+              }}
+              image={article.urlToImage}
+              title="article image"
+            />
+          </Box>
         </Link>
         <CardContent>
           <Typography

@@ -1,11 +1,17 @@
 import { useState } from "react"
-import MenuItem from "@mui/material/MenuItem"
-import { FormControl, Select, SelectChangeEvent, Typography } from "@mui/material"
+import {
+  FormControl,
+  Select,
+  SelectChangeEvent,
+  Typography,
+  MenuItem,
+} from "@mui/material"
 import { useAppDispatch, useAppSelector } from "../../../app/store"
+import dayjs from "dayjs"
+
 import { newsModel, queryModel } from "../../../entities"
 import { EDateVariants } from "../../../shared"
 import DatePickerModal from "./DatePickerModal"
-import dayjs from "dayjs"
 
 const DatePublishPicker = () => {
   const [open, setOpen] = useState(false)
@@ -18,11 +24,11 @@ const DatePublishPicker = () => {
   const changeHandler = (e: SelectChangeEvent) => {
     let variant = e.target.value as EDateVariants
 
-   if (variant === EDateVariants.canceldate) variant = EDateVariants.all 
-   if (variant === EDateVariants.pickdate) variant = dateVariant 
+    if (variant === EDateVariants.canceldate) variant = EDateVariants.all
+    if (variant === EDateVariants.pickdate) variant = dateVariant
 
     dispatch(queryModel.setDateVariant(variant))
-    
+
     if (e.target.value === EDateVariants.pickdate) return handleOpen()
 
     dispatch(queryModel.setDate(null))
@@ -53,8 +59,7 @@ const DatePublishPicker = () => {
             </MenuItem>
           )}
           {date && (
-            <MenuItem value={EDateVariants.canceldate} >
-
+            <MenuItem value={EDateVariants.canceldate}>
               <Typography color="primary">Сбросить</Typography>
             </MenuItem>
           )}

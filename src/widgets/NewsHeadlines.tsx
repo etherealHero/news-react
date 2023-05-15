@@ -1,31 +1,39 @@
-// import { useLoaderData } from "react-router-dom"
-// import { INewsData } from "../shared"
+import { useEffect } from "react"
+import { Typography } from "@mui/material"
+import Grid from "@mui/material/Unstable_Grid2"
+import { useAppDispatch, useAppSelector } from "../app/store"
+
+import { Article, SkeletonArticle, newsModel } from "../entities"
 
 const NewsHeadlines = () => {
+  const { status, error, articles } = useAppSelector((state) => state.news)
+  const { pageSize } = useAppSelector((state) => state.query)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(newsModel.fetchNews())
+  }, [])
+
+  if (status === "pending") return <SkeletonArticle length={pageSize} />
+  if (status === "rejected") return <Typography>{error}</Typography>
+
+  if (articles && articles.length)
+    return (
+      <Grid
+        container
+        spacing={3}
+        sx={{ justifyContent: { xs: "center", sm: "flex-start" } }}
+      >
+        {articles.map((article, idx) => (
+          <Article article={article} key={idx} idx={idx} />
+        ))}
+      </Grid>
+    )
+
   return (
-    <p>NewsHeadlines</p>
-    // <ul>
-    //   {articles.length &&
-    //     articles.map((article, idx) => (
-    //       <li
-    //         key={idx}
-    //         style={{ marginBottom: 10, border: "1px solid #000", padding: 10 }}
-    //       >
-    //         <img
-    //           src={article.urlToImage}
-    //           alt="article title"
-    //           style={{
-    //             width: "50%",
-    //             objectFit: "contain",
-    //           }}
-    //         />
-    //         <h3>{article.title}</h3>
-    //         <p>{article.description}</p>
-    //         <p>{article.publishedAt}</p>
-    //         <br />
-    //       </li>
-    //     ))}
-    // </ul>
+    <Typography variant="h5" align="center" mt={10}>
+      Ничего не найдено
+    </Typography>
   )
 }
 

@@ -3,6 +3,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import { useAppSelector } from "./store"
 import {
+  Box,
   Container,
   CssBaseline,
   ThemeProvider,
@@ -10,7 +11,7 @@ import {
   darkScrollbar,
 } from "@mui/material"
 
-import { Navbar } from "../widgets"
+import { Footer, Navbar } from "../widgets"
 import { ReactNode } from "react"
 
 const Layout = ({ children }: { children?: ReactNode }) => {
@@ -42,11 +43,14 @@ const Layout = ({ children }: { children?: ReactNode }) => {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ThemeProvider theme={theme}>
         <CssBaseline enableColorScheme />
-        <Navbar />
-        <Container sx={{ pt: 2, pb: 2 }}>
-          <Outlet />
-          {children}
-        </Container>
+        <Box display="flex" flexDirection="column" minHeight="100vh">
+          <Navbar />
+          <Container sx={{ pt: 2, pb: 2, flexGrow: 1 }}>
+            <Outlet />
+            {children}
+          </Container>
+          <Footer />
+        </Box>
       </ThemeProvider>
     </LocalizationProvider>
   )

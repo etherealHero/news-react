@@ -14,7 +14,6 @@ function AboutPage() {
         sx={{
           mt: 2,
           mb: 2,
-          background: "#ccc",
         }}
       >
         <Map />

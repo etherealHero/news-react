@@ -1,20 +1,9 @@
-import { useEffect } from "react"
 import { Box, Typography } from "@mui/material"
-import Grid from "@mui/material/Unstable_Grid2"
-import { useAppDispatch, useAppSelector } from "../app/store"
 
+import { NewsHeadlines } from "../widgets"
 import { DatePublishPicker, PaginationNews } from "../features"
-import { Article, SkeletonArticle, newsModel } from "../entities"
 
 const MainPage = () => {
-  const { status, error, articles } = useAppSelector((state) => state.news)
-  const { pageSize } = useAppSelector((state) => state.query)
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    dispatch(newsModel.fetchNews())
-  }, [])
-
   return (
     <>
       <Box
@@ -29,26 +18,8 @@ const MainPage = () => {
           <DatePublishPicker />
         </Box>
       </Box>
-      {status === "pending" ? (
-        <SkeletonArticle length={pageSize} />
-      ) : status === "rejected" ? (
-        <Typography>{error}</Typography>
-      ) : articles?.length ? (
-        <Grid
-          container
-          spacing={3}
-          sx={{ justifyContent: { xs: "center", sm: "flex-start" } }}
-        >
-          {articles.map((article, idx) => (
-            <Article article={article} key={idx} idx={idx} />
-          ))}
-        </Grid>
-      ) : (
-        <Typography variant="h5" align="center" mt={10}>
-          Ничего не найдено
-        </Typography>
-      )}
-      <Box display="flex" justifyContent="center" mt={4}>
+      <NewsHeadlines />
+      <Box display="flex" justifyContent="center" mt={4} mb={2}>
         <PaginationNews />
       </Box>
     </>
