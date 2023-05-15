@@ -74,7 +74,9 @@ function DetailsPage() {
             <TodayOutlined fontSize="small" />
             Дата публикации: {dayjs(article.publishedAt).format("D MMMM, h:mm")}
           </Typography>
-          <Image src={article.urlToImage} />
+          <Box sx={{ width: { xs: "70%", sm: "100%" }, m: "0 auto" }}>
+            <Image src={article.urlToImage} />
+          </Box>
           <Typography
             variant="body1"
             color="text.secondary"
