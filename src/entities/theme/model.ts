@@ -8,7 +8,7 @@ interface ITheme {
 }
 
 const initialState: ITheme = {
-  mode: "dark",
+  mode: "light",
   fontsize: 16,
 }
 

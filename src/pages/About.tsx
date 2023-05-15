@@ -6,9 +6,18 @@ function AboutPage() {
     <>
       <Typography variant="h4">О нас</Typography>
       <Typography sx={{ mt: 2 }} textAlign="justify">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae
-        nisi dolor dicta dolores laudantium, nulla voluptatem ipsam at
-        cupiditate sint doloremque atque nobis illum explicabo:
+        Сетевое издание News
+        <br />
+        Учредитель: ООО «Новости»
+        <br />
+        Главный редактор: Иванов Петров Федорович
+        <br />
+        Email: info@news.ru
+        <br />
+        Телефон: +7(999) 999-50-50
+        <br />
+        Адрес: News офис 111, 3 этаж, ​Льва Толстого, 19 Центральный район,
+        Хабаровск, 680000
       </Typography>
       <Box
         sx={{
@@ -19,19 +28,34 @@ function AboutPage() {
         <Map />
       </Box>
       <Typography sx={{ mt: 1 }} textAlign="justify">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae
-        nisi dolor dicta dolores laudantium, nulla voluptatem ipsam at
-        cupiditate sint doloremque atque nobis illum explicabo aspernatur
-        ratione tenetur dignissimos saepe!
+        Веб-сайт является информационным ресурсом. Заходя на сайт, пользователь
+        принимает настоящие Правила. Пользователи самостоятельно отслеживают
+        данные изменения и принимают решение о возможности дальнейшего
+        использования сайта.
       </Typography>
       <Typography sx={{ mt: 1 }} textAlign="justify">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae
-        nisi dolor dicta dolores laudantium, nulla voluptatem ipsam at
-        cupiditate sint doloremque atque nobis illum explicabo aspernatur
-        ratione tenetur dignissimos saepe! Lorem ipsum dolor sit amet
-        consectetur adipisicing elit. Doloremque quasi pariatur ullam nemo eius
-        quo, libero id minus reiciendis porro. Quo doloremque dolorum voluptate
-        quaerat quam tempore doloribus atque totam.
+        Информация, указанная на данном сайте представляется как публичная
+        информация (если иное не указано в материалах) и может свободно
+        распространяться, или копироваться для некоммерческого использования в
+        информационных, научных, учебных или культурных целях.
+      </Typography>
+
+      <Typography sx={{ mt: 1 }} textAlign="justify">
+        Видеоконтент сайта может быть встроен для показа на сторонних интернет
+        ресурсах с помощью технологии embed (iframe) без каких-либо ограничений,
+        при условии неограниченного доступа конечного пользователя к
+        размещаемому контенту.
+      </Typography>
+
+      <Typography sx={{ mt: 1 }} textAlign="justify">
+        Любое коммерческое использование материалов без письменного согласия
+        правообладателей запрещено.
+      </Typography>
+
+      <Typography sx={{ mt: 1 }} textAlign="justify">
+        Использование любого материала, размещенного на данном сайте,
+        цитирование в СМИ возможно только со ссылкой на источник с указанием
+        интернет-страницы, с которой данные материалы были взяты.
       </Typography>
     </>
   )

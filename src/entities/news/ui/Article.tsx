@@ -1,6 +1,16 @@
-import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material"
 import Grid from "@mui/material/Unstable_Grid2"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
+import dayjs from "dayjs"
+import { TodayOutlined } from "@mui/icons-material"
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material"
+
 import { IArticle } from "../../../shared"
 
 type Props = {
@@ -9,6 +19,8 @@ type Props = {
 }
 
 const Article = ({ article, idx }: Props) => {
+  const { search } = useLocation()
+
   return (
     <Grid xs={12} sm={6} md={4}>
       <Card variant="outlined" sx={{ boxShadow: 3 }}>
@@ -46,10 +58,22 @@ const Article = ({ article, idx }: Props) => {
         </Link>
         <CardContent>
           <Typography
+            variant="body2"
+            color="text.secondary"
+            fontWeight={500}
+            mb="2px"
+            display="flex"
+            alignItems="center"
+            columnGap={1}
+          >
+            {dayjs(article.publishedAt).format("D MMMM, h:mm")}
+            <TodayOutlined fontSize="small" />
+          </Typography>
+          <Typography
             gutterBottom
             variant="h6"
             component={Link}
-            to={`/news/${idx}`}
+            to={`/news/${idx + search}`}
             sx={{
               color: "inherit",
               textDecoration: "none",
@@ -66,9 +90,15 @@ const Article = ({ article, idx }: Props) => {
           >
             {article.description}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {article.publishedAt}
-          </Typography>
+          <Button
+            variant="contained"
+            fullWidth
+            sx={{ mt: 1 }}
+            component={Link}
+            to={`/news/${idx + search}`}
+          >
+            Перейти
+          </Button>
         </CardContent>
       </Card>
     </Grid>

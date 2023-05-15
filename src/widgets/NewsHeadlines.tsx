@@ -4,17 +4,28 @@ import Grid from "@mui/material/Unstable_Grid2"
 import { useAppDispatch, useAppSelector } from "../app/store"
 
 import { Article, SkeletonArticle, newsModel } from "../entities"
+import { useNavigate, useSearchParams } from "react-router-dom"
 
 const NewsHeadlines = () => {
+  const [searchParams] = useSearchParams()
   const { status, error, articles } = useAppSelector((state) => state.news)
-  const { pageSize } = useAppSelector((state) => state.query)
   const dispatch = useAppDispatch()
+
+  const navigate = useNavigate()
+  const query = useAppSelector((state) => state.query)
+
+  useEffect(() => {
+    navigate(`/?page=${query.page}&pageSize=${query.pageSize}`)
+  }, [query])
 
   useEffect(() => {
     dispatch(newsModel.fetchNews())
   }, [])
 
-  if (status === "pending") return <SkeletonArticle length={pageSize} />
+  if (status === "pending")
+    return (
+      <SkeletonArticle length={Number(searchParams.get("pageSize")) || 3} />
+    )
   if (status === "rejected") return <Typography>{error}</Typography>
 
   if (articles && articles.length)

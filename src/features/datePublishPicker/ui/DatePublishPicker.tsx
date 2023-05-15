@@ -40,6 +40,7 @@ const DatePublishPicker = () => {
     <>
       <FormControl sx={{ minWidth: 80 }}>
         <Select
+          defaultValue={EDateVariants.all}
           value={date ? EDateVariants.date : dateVariant}
           onChange={changeHandler}
           displayEmpty
