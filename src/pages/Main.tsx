@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material"
 
 import { NewsHeadlines } from "../widgets"
-import { DatePublishPicker, PaginationNews } from "../features"
+import { DatePublishPicker } from "../features"
 
 const MainPage = () => {
   return (
@@ -19,9 +19,6 @@ const MainPage = () => {
         </Box>
       </Box>
       <NewsHeadlines />
-      <Box display="flex" justifyContent="center" mt={4} mb={2}>
-        <PaginationNews />
-      </Box>
     </>
   )
 }

@@ -15,7 +15,9 @@ const SliderPageSize = () => {
     value: number | number[]
   ) => {
     const pageSize = marks.find((mark) => mark.value === value)?.pageSize || 3
-    dispatch(queryModel.setPageSize(pageSize))
+
+    dispatch(queryModel.setPageSizeWithReset(pageSize))
+    dispatch(queryModel.setIsInfiniteQuery(value === 100))
   }
 
   return (

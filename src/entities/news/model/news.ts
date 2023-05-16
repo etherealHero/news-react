@@ -10,9 +10,9 @@ enum Model {
 
 const fetchNews = createAsyncThunk(
   `${Model.name}/fetch`,
-  async (_, thunkAPI) => {
+  async (_infinite: true | undefined, thunkAPI) => {
     try {
-      const { dateVariant, page, pageSize, date } = (
+      const { dateVariant, page, pageSize, date, isInfinite } = (
         thunkAPI.getState() as RootState
       ).query
 
@@ -27,7 +27,7 @@ const fetchNews = createAsyncThunk(
         throw new Error("Что-то пошло не так")
       }
 
-      return response.data
+      return { ...response.data, isInfinite }
     } catch (error) {
       return thunkAPI.rejectWithValue(
         (error as AxiosError<INewsData>).response?.data.message
@@ -38,13 +38,21 @@ const fetchNews = createAsyncThunk(
 
 const fetchArticleById = createAsyncThunk(
   `${Model.name}/fetchArticle`,
-  async (opt: { page: number; pageSize: number; id: number }, thunkAPI) => {
+  async (
+    opt: { page: number; pageSize: number; id: number | string },
+    thunkAPI
+  ) => {
     try {
       const { dateVariant, date } = (thunkAPI.getState() as RootState).query
 
+      const page =
+        typeof opt.id === "string"
+          ? +opt.id + 1
+          : (opt.page - 1) * opt.pageSize + +opt.id + 1
+
       const response = await newsAPI.get({
         dateVariant,
-        page: (opt.page - 1) * opt.pageSize + opt.id + 1,
+        page,
         pageSize: 1,
         date,
       })
@@ -79,17 +87,28 @@ const initialState: INews = {
 export const newsSlice = createSlice({
   name: Model.name,
   initialState,
-  reducers: {},
+  reducers: {
+    resetArticles: (state) => {
+      state.articles = []
+    },
+  },
   extraReducers: (builder) => {
-    builder.addCase(fetchNews.pending, (state) => {
-      state.status = "pending"
+    builder.addCase(fetchNews.pending, (state, action) => {
+      if (!action.meta.arg) {
+        state.status = "pending"
+      }
       state.error = null
     })
     builder.addCase(fetchNews.fulfilled, (state, action) => {
+      if (action.payload.isInfinite) {
+        state.articles = [...state.articles, ...action.payload.articles]
+      } else {
+        state.articles = action.payload.articles
+      }
+
       const total = action.payload.totalResults
 
       state.status = action.payload.status
-      state.articles = action.payload.articles
       state.totalResults = total <= 100 ? total : 100
     })
     builder.addCase(fetchNews.rejected, (state, action) => {

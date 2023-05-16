@@ -33,6 +33,7 @@ const DatePublishPicker = () => {
 
     dispatch(queryModel.setDate(null))
     dispatch(queryModel.setPage(1))
+    dispatch(newsModel.resetArticles())
     dispatch(newsModel.fetchNews())
   }
 

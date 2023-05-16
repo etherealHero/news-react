@@ -17,6 +17,6 @@ export const marks = [
   {
     value: 100,
     label: "Неограничено",
-    pageSize: 20,
+    pageSize: 4,
   },
 ]

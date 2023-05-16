@@ -3,14 +3,16 @@ import { EDateVariants, INewsData } from "."
 
 import dayjs from "dayjs"
 import weekday from "dayjs/plugin/weekday"
+import utc from "dayjs/plugin/utc"
 import "dayjs/locale/ru"
 
 dayjs.locale("ru")
 dayjs.extend(weekday)
+dayjs.extend(utc)
 
-const API_KEY = "d5b30b1afd82498a992311089ea92b4c"
-// const API_KEY = "3d507fc9f30b4a7d9efeb083c18b25c8"
-// const API_KEY = "b121cb1b4a2b4016b3f526cc5c51fa59"
+// const API_KEY = "d5b30b1afd82498a992311089ea92b4c" // 12:00 16.05
+// const API_KEY = "3d507fc9f30b4a7d9efeb083c18b25c8" // 13:24 16.05
+const API_KEY = "b121cb1b4a2b4016b3f526cc5c51fa59"
 
 const baseUrl = `https://newsapi.org/v2/everything?q=технологии&language=ru&apiKey=${API_KEY}&domains=techinsider.ru,habr.com,lifehacker.ru,computerra.ru,servernews.ru,xakep.ru,iphones.ru,cnews.ru,snob.ru,3dnews.ru,overclockers.ru,droider.ru&sortBy=publishedAt`
 
@@ -58,9 +60,7 @@ export const newsAPI = {
       }
 
       case EDateVariants.pickdate: {
-        const to = dayjs(date).subtract(1, "day").format("YYYY-MM-DD")
-
-        console.log(to)
+        const to = dayjs(date).format("YYYY-MM-DD")
 
         res = await axios<INewsData>(`${urlWithPages}&to=${to}`)
         break

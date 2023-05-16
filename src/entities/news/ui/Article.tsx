@@ -66,7 +66,7 @@ const Article = ({ article, idx }: Props) => {
             alignItems="center"
             columnGap={1}
           >
-            {dayjs(article.publishedAt).format("D MMMM, h:mm")}
+            {dayjs(article.publishedAt).utc().format("D MMMM, h:mm")}
             <TodayOutlined fontSize="small" />
           </Typography>
           <Typography

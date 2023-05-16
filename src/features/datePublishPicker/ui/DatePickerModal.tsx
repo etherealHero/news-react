@@ -31,6 +31,7 @@ const DatePickerModal = ({ open, handleClose }: Props) => {
     dispatch(queryModel.setDate(date?.toISOString() || ""))
     dispatch(queryModel.setDateVariant(EDateVariants.pickdate))
     dispatch(queryModel.setPage(1))
+    dispatch(newsModel.resetArticles())
     dispatch(newsModel.fetchNews())
     handleClose()
   }

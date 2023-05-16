@@ -11,6 +11,7 @@ interface IQuery {
   pageSize: number
   dateVariant: EDateVariants
   date: string | null
+  isInfinite?: boolean
 }
 
 const initialState: IQuery = {
@@ -24,7 +25,7 @@ export const newsSlice = createSlice({
   name: Model.name,
   initialState,
   reducers: {
-    setPageSize: (state, action: PayloadAction<number>) => {
+    setPageSizeWithReset: (state, action: PayloadAction<number>) => {
       state.pageSize = action.payload
 
       // reset data
@@ -40,6 +41,9 @@ export const newsSlice = createSlice({
     },
     setDate: (state, action: PayloadAction<string | null>) => {
       state.date = action.payload
+    },
+    setIsInfiniteQuery: (state, action: PayloadAction<boolean>) => {
+      state.isInfinite = action.payload
     },
   },
 })
