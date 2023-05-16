@@ -67,9 +67,12 @@ export const newsAPI = {
       }
 
       case EDateVariants.all:
-      default:
-        res = await axios<INewsData>(urlWithPages)
+      default: {
+        const to = dayjs().subtract(1, "day").format("YYYY-MM-DD")
+
+        res = await axios<INewsData>(`${urlWithPages}&to=${to}`)
         break
+      }
     }
 
     return res
