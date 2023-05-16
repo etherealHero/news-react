@@ -1,5 +1,9 @@
 # SPA React JS | News app
 
+## preview
+
+<img src="./preview.jpg" height="auto" width="100%" alt="preview"  />
+
 ## stack
 
 <div align="left">
