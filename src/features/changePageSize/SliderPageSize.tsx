@@ -1,7 +1,7 @@
 import { Slider } from "@mui/material"
 import { useAppDispatch, useAppSelector } from "../../app/store"
 
-import { queryModel } from "../../entities"
+import { newsModel, queryModel } from "../../entities"
 import { marks } from "./config"
 
 const SliderPageSize = () => {
@@ -17,6 +17,7 @@ const SliderPageSize = () => {
     const pageSize = marks.find((mark) => mark.value === value)?.pageSize || 3
 
     dispatch(queryModel.setPageSizeWithReset(pageSize))
+    dispatch(newsModel.removeArticles())
     dispatch(queryModel.setIsInfiniteQuery(value === 100))
   }
 

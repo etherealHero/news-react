@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { RootState } from "../../../app/store"
 
 import { newsAPI, IArticle, INewsData } from "../../../shared"
@@ -61,6 +61,8 @@ const fetchArticleById = createAsyncThunk(
         throw new Error("Что-то пошло не так")
       }
 
+      thunkAPI.dispatch(newsModel.setDetails(response.data.articles[0]))
+
       return response.data
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -73,6 +75,7 @@ const fetchArticleById = createAsyncThunk(
 interface INews {
   totalResults: number
   articles: IArticle[] | []
+  articleDetails?: IArticle | null
   status: string | null
   error: string | null
 }
@@ -88,8 +91,14 @@ export const newsSlice = createSlice({
   name: Model.name,
   initialState,
   reducers: {
-    resetArticles: (state) => {
+    removeArticles: (state) => {
       state.articles = []
+    },
+    removeDetails: (state) => {
+      state.articleDetails = null
+    },
+    setDetails: (state, { payload }: PayloadAction<IArticle>) => {
+      state.articleDetails = payload
     },
   },
   extraReducers: (builder) => {
@@ -121,7 +130,6 @@ export const newsSlice = createSlice({
     })
     builder.addCase(fetchArticleById.fulfilled, (state, action) => {
       state.status = action.payload.status
-      state.articles = action.payload.articles
     })
     builder.addCase(fetchArticleById.rejected, (state, action) => {
       state.status = "rejected"

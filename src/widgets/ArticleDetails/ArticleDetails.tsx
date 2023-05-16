@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../../app/store"
 
 import { newsModel } from "../../entities"
-import { IArticle, INewsData } from "../../shared"
 import { Article, Preloader } from "./ui"
 
 type Props = {
@@ -15,28 +14,32 @@ type Props = {
 
 const ArticleDetails = ({ params }: Props) => {
   const { id, page, pageSize } = params
-  const [article, setArticle] = useState<IArticle>()
   const isInfinite = useAppSelector((state) => state.query.isInfinite)
+  const news = useAppSelector((state) => state.news)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (!page || !pageSize || !id) return
-    dispatch(
-      newsModel.fetchArticleById({
-        id: isInfinite ? id : +id,
-        page: +page,
-        pageSize: +pageSize,
-      })
-    )
-      .unwrap()
-      .then((promiseResult: INewsData) => {
-        setArticle(promiseResult.articles[0])
-        window.scrollTo({ top: 0, behavior: "smooth" })
-      })
+    window.scrollTo({ top: 0, behavior: "smooth" })
+
+    if (isInfinite && id) {
+      dispatch(newsModel.setDetails(news.articles[+id]))
+      return
+    }
+
+    if (id && page && pageSize) {
+      dispatch(
+        newsModel.fetchArticleById({
+          id: +id,
+          page: +page,
+          pageSize: +pageSize,
+        })
+      )
+      return
+    }
   }, [])
 
-  if (!article) return <Preloader />
-  return <Article article={article} />
+  if (!news.articleDetails) return <Preloader />
+  return <Article article={news.articleDetails} />
 }
 
 export default ArticleDetails

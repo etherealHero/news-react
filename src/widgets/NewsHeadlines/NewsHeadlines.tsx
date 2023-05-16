@@ -18,11 +18,16 @@ const NewsHeadlines = () => {
   }, [query])
 
   useEffect(() => {
-    if (query.isInfinite) {
+    if (query.isInfinite && !news.articleDetails) {
       dispatch(queryModel.setPageSizeWithReset(query.pageSize))
+      dispatch(newsModel.removeArticles())
+      dispatch(newsModel.fetchNews())
     }
-    dispatch(newsModel.resetArticles())
-    dispatch(newsModel.fetchNews())
+    if (!query.isInfinite) {
+      dispatch(newsModel.removeArticles())
+      dispatch(newsModel.fetchNews())
+    }
+    dispatch(newsModel.removeDetails())
   }, [])
 
   if (news.status === "pending" && !query.isInfinite) return <Preloader />

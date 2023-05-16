@@ -27,6 +27,7 @@ const List = ({ isInfinite }: Props) => {
             <SkeletonArticleCard />
             <SkeletonArticleCard />
             <SkeletonArticleCard />
+            <SkeletonArticleCard />
           </>
         )}
       </Grid>
