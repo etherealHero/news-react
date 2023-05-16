@@ -12,7 +12,8 @@ dayjs.extend(utc)
 
 // const API_KEY = "d5b30b1afd82498a992311089ea92b4c" // 12:00 16.05
 // const API_KEY = "3d507fc9f30b4a7d9efeb083c18b25c8" // 13:24 16.05
-const API_KEY = "b121cb1b4a2b4016b3f526cc5c51fa59"
+// const API_KEY = "b121cb1b4a2b4016b3f526cc5c51fa59"
+const API_KEY = "7040ec2f4c194fcf979ce0b297787e30"
 
 const baseUrl = `https://newsapi.org/v2/everything?q=технологии&language=ru&apiKey=${API_KEY}&domains=techinsider.ru,habr.com,lifehacker.ru,computerra.ru,servernews.ru,xakep.ru,iphones.ru,cnews.ru,snob.ru,3dnews.ru,overclockers.ru,droider.ru&sortBy=publishedAt`
 
