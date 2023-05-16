@@ -1,18 +1,14 @@
 import { Box, Button, Typography } from "@mui/material"
 import Grid from "@mui/material/Unstable_Grid2"
-import { ArrowBack, ArrowOutward, TodayOutlined } from "@mui/icons-material"
-import dayjs from "dayjs"
-import { useNavigate } from "react-router-dom"
+import { ArrowOutward, TodayOutlined } from "@mui/icons-material"
 
-import { IArticle, Image } from "../../../shared"
+import { DateFormat, GoBack, IArticle, Image } from "../../../shared"
 
 type Props = {
   article: IArticle
 }
 
 const Article = ({ article }: Props) => {
-  const navigate = useNavigate()
-
   return (
     <Grid
       container
@@ -20,10 +16,7 @@ const Article = ({ article }: Props) => {
       sx={{ justifyContent: "center", m: "0 -1rem 1rem" }}
     >
       <Grid xs={12} sm={10} md={8}>
-        <Button variant="text" onClick={() => navigate(-1)} sx={{ mb: 2 }}>
-          <ArrowBack sx={{ mr: 1, ml: -1 }} />
-          Назад
-        </Button>
+        <GoBack />
         <Typography
           gutterBottom
           variant="h5"
@@ -46,8 +39,7 @@ const Article = ({ article }: Props) => {
           columnGap={1}
         >
           <TodayOutlined fontSize="small" />
-          Дата публикации:{" "}
-          {dayjs(article.publishedAt).utc().format("D MMMM, h:mm")}
+          Дата публикации: <DateFormat date={article.publishedAt} />
         </Typography>
         <Box sx={{ width: { xs: "70%", sm: "100%" }, m: "0 auto" }}>
           <Image src={article.urlToImage} />

@@ -1,5 +1,6 @@
 import { Box, Card, CardContent, Typography, Skeleton } from "@mui/material"
 import Grid from "@mui/material/Unstable_Grid2"
+import { GoBack } from "../../../shared"
 
 const Preloader = () => {
   return (
@@ -9,6 +10,7 @@ const Preloader = () => {
       sx={{ justifyContent: "center", m: "0 -1rem 1rem" }}
     >
       <Grid xs={12} sm={10} md={8}>
+        <GoBack />
         <Card variant="outlined" sx={{ boxShadow: 3 }}>
           <Box sx={{ bgcolor: "grey.400" }}>
             <Skeleton

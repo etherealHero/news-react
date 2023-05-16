@@ -1,4 +1,2 @@
-import Image from "./Image"
-
-export { Image }
-export * from "./news"
+export * from "./ui"
+export * from "./newsAPI"

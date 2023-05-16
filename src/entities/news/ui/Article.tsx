@@ -1,6 +1,5 @@
 import Grid from "@mui/material/Unstable_Grid2"
 import { Link, useLocation } from "react-router-dom"
-import dayjs from "dayjs"
 import { TodayOutlined } from "@mui/icons-material"
 import {
   Box,
@@ -11,7 +10,7 @@ import {
   Typography,
 } from "@mui/material"
 
-import { IArticle } from "../../../shared"
+import { DateFormat, IArticle } from "../../../shared"
 
 type Props = {
   article: IArticle
@@ -66,7 +65,7 @@ const Article = ({ article, idx }: Props) => {
             alignItems="center"
             columnGap={1}
           >
-            {dayjs(article.publishedAt).utc().format("D MMMM, h:mm")}
+            <DateFormat date={article.publishedAt} />
             <TodayOutlined fontSize="small" />
           </Typography>
           <Typography

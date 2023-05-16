@@ -1,5 +1,6 @@
 import { Pagination } from "@mui/material"
 import { useAppDispatch, useAppSelector } from "../../app/store"
+
 import { newsModel, queryModel } from "../../entities"
 
 const PaginationNews = () => {
@@ -13,7 +14,6 @@ const PaginationNews = () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
 
     dispatch(queryModel.setPage(page))
-
     dispatch(newsModel.fetchNews())
   }
 
